@@ -1,18 +1,17 @@
 body {
   font-family: sans-serif;
   background: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
 }
 
 .container {
   text-align: center;
+  margin-top: 50px;
 }
 
-h1 {
+.menu h1 {
+  margin-bottom: 30px;
   color: #333;
 }
 
@@ -34,11 +33,10 @@ h1 {
   align-items: center;
   font-size: 2rem;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 .cell:hover {
-  background: #f0f0f0;
+  background: #eee;
 }
 
 .status {
@@ -46,17 +44,19 @@ h1 {
   margin: 10px 0;
 }
 
-.reset-btn {
+.btn, .reset-btn, .back-btn {
   padding: 10px 20px;
   font-size: 1rem;
   background: #4caf50;
   color: white;
   border: none;
   border-radius: 6px;
+  margin: 5px;
   cursor: pointer;
-  transition: background 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.reset-btn:hover {
+.btn:hover, .reset-btn:hover, .back-btn:hover {
   background: #45a049;
 }

@@ -1,71 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-//import React, { useState } from "react";
-//import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import TicTacToe from "./TicTacToe";
+import CounterGame from "./CounterGame";
+import "./App.css";
 
 function App() {
-  const initialBoard = Array(9).fill(null);
-  const [board, setBoard] = useState(initialBoard);
-  const [xIsNext, setXIsNext] = useState(true);
-
-  const winner = calculateWinner(board);
-
-  function handleClick(index) {
-    if (board[index] || winner) return;
-    const newBoard = board.slice();
-    newBoard[index] = xIsNext ? "X" : "O";
-    setBoard(newBoard);
-    setXIsNext(!xIsNext);
-  }
-
-  function resetGame() {
-    setBoard(initialBoard);
-    setXIsNext(true);
-  }
-
-  function renderCell(index) {
-    return (
-      <div className="cell" onClick={() => handleClick(index)}>
-        {board[index]}
-      </div>
-    );
-  }
-
   return (
-    <div className="container">
-      <h1>Tic Tac Toe</h1>
-      <div className="board">
-        {board.map((_, i) => renderCell(i))}
+    <Router>
+      <div className="container">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="menu">
+                <h1>Game Menu</h1>
+                <Link to="/tic-tac-toe" className="btn">Play Tic Tac Toe</Link>
+                <Link to="/counter" className="btn">Play Counter Game</Link>
+              </div>
+            }
+          />
+          <Route path="/tic-tac-toe" element={<TicTacToe />} />
+          <Route path="/counter" element={<CounterGame />} />
+        </Routes>
       </div>
-      <div className="status">
-        {winner
-          ? `Winner: ${winner}`
-          : board.includes(null)
-          ? `Next Player: ${xIsNext ? "X" : "O"}`
-          : "It's a Draw!"}
-      </div>
-      <button className="reset-btn" onClick={resetGame}>Restart</button>
-    </div>
+    </Router>
   );
 }
 
-// Helper function to check for a winner
-function calculateWinner(cells) {
-  const lines = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
-    [0, 4, 8], [2, 4, 6]             // diagonals
-  ];
-  for (let [a, b, c] of lines) {
-    if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-      return cells[a];
-    }
-  }
-  return null;
-}
-
 export default App;
-
